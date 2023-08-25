@@ -1,0 +1,40 @@
+﻿@using VizyonAuto.Models;
+@model IEnumerable<ProductModel>
+
+<div class="row">
+    @foreach (var urun in Model.OrderBy(x => x.Id))
+    {
+        <div class="col-md-3 mb-5">
+            <div class="card h-100">
+                <img class="card-img-top" src="/Upload/@urun.Image" alt="@urun.Name" style="width:280px; height:156px; object-fit:cover">
+                <div class="card-body p-3">
+                    <div class="text-center">
+                        <h5 class="fw-bolder">@urun.Name </h5>
+                        <div class="d-flex justify-content-center small text-warning mb-2">
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                        </div>
+                        <span class="product-price">
+                            <i class="fa fa-try" aria-hidden="true"></i>
+                            @*@{
+                                    // Convert the price to a formatted string without trailing zeros
+                                    string formattedPrice = urun.Price.ToString("N0");
+                                }
+                                @formattedPrice ₺*@
+
+                            @urun.Price.ToString("C2")
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark mt-auto" href="/Home/Details/@urun.Id">Ürün İncele</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

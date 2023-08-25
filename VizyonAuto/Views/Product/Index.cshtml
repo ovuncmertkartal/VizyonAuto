@@ -1,0 +1,108 @@
+﻿@model IEnumerable<VizyonAuto.Entity.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container pb-5">
+
+    <h2>Yeni Ürün</h2>
+    <hr />
+    <p>
+        @Html.ActionLink("Yeni Ürün", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Siparişler", "index","order", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Kategoriler", "index", "category", null, new { @class = "btn btn-primary" })
+    </p>
+    <hr />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Ürün</th>
+                <th>Ürün Detayı</th>
+                <th>Anasayfa</th>
+                <th>Ürünler</th>
+                <th></th>
+
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                @*fazlalık*@
+                @*<tr>
+                    <th>
+                        <img src="@item.Image" width="100" height="100" />
+
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsHome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsApproved)
+                    </th>
+                    <th style="width: 140px;"></th>
+                </tr>*@
+
+
+                <td>
+                    <img src="/Upload/@item.Image" width="70" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.IsHome)
+                    {
+                        <span class="badge bg-success">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            Evet
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            Hayır
+                        </span>
+                    }
+                </td>
+                <td>
+                    @if (item.IsApproved)
+                    {
+                        <label class="badge bg-success">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            Evet
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="badge bg-danger">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            Hayır
+                        </label>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

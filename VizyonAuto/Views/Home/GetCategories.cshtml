@@ -1,0 +1,50 @@
+﻿@model IEnumerable<VizyonAuto.Entity.Category>
+
+@{
+    var selectedCategory = Url.RequestContext.RouteData.Values["id"];
+}
+
+<ul class="list-group">
+    <li>
+        <a href="/Home/List" class="list-group-item">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            Tüm Kategoriler
+        </a>
+    </li>
+
+    @foreach (var item in Model)
+    {
+        if (selectedCategory != null)
+        {
+            if (item.Id == int.Parse(selectedCategory.ToString()))
+            {
+
+                //seçilen kategori ile route id si birbirine eşit.
+                <li>
+                    <a href="/Home/List/@item.Name" class="list-group-item active">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        @item.Name
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="/Home/List/@item.Id" class="list-group-item">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        @item.Name
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            <li>
+                <a href="/Home/List/@item.Id" class="list-group-item">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    @item.Name
+                </a>
+            </li>
+        }
+    }
+</ul>
